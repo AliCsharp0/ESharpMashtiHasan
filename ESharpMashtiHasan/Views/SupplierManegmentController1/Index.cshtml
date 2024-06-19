@@ -1,0 +1,61 @@
+﻿@model List<Shapping.DomainModel.Models.Supplier>;
+<a asp-controller="SupplierManegmentController1" asp-action="AddNew">Add New</a>
+@if (Model == null || Model.Count==0)
+{
+	<h1 class="text-center text-danger	">There is Not Supplier</h1>
+}
+else
+{
+	<table class="table table-hover table-bordered table-striped table-sm">
+		@if(TempData["ErrorMessage"] != null)
+		{
+			<tr>
+				<td colspan="4">
+					<h1 class="text-center text-danger" >
+						@TempData["ErrorMessage"]
+					</h1>
+				</td>
+			</tr>
+		}
+		<tr>
+			<td>
+				SupplierID
+			</td>
+			<td>
+				SupplierName
+			</td>
+			<td>
+				SupplierDescription
+			</td>
+			<td>
+				Delete
+			</td>
+			<td>
+				Update
+			</td>
+		</tr>
+		@foreach (var item in this.Model)
+		{
+			<tr>
+				<td>
+					@item.SupplierID
+				</td>
+				<td>
+					@item.SupplierName
+				</td>
+				<td>
+					@item.SupplierDescription
+				</td>
+				<td>
+					<form asp-action="Delete" method="post" onsubmit="return ConfirmDelete()">
+						<input type="hidden" value="@item.SupplierID" name="id"/>
+						<input type="submit" value="Delete" class="btn btn-sm btn-danger" />
+					</form>
+				</td>
+				<td>
+					@Html.ActionLink("Edit", "Edit", "SupplierManegmentController1",new{id=item.SupplierID},new{@class="btn btn-primary"});
+				</td>
+			</tr>
+		}
+	</table>
+}

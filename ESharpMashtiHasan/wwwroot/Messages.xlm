@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Messages>
+	<Message>
+		<SectionID>1</SectionID>
+		<SectionName>Product Management</SectionName>
+		<MessageID>1</MessageID>
+		<MessageTextEN>Product Name Already Exist</MessageTextEN>
+		<MessageTextFA>نام محصول تکراری است</MessageTextFA>
+	</Message>
+	<Message>
+		<SectionID>1</SectionID>
+		<SectionName>Product Management</SectionName>
+		<MessageID>2</MessageID>
+		<MessageTextEN>Slug Name Already Exist</MessageTextEN>
+		<MessageTextFA>اسلاگ محصول تکراری است</MessageTextFA>
+	</Message>
+</Messages>

@@ -1,0 +1,64 @@
+﻿@model ESharpMashtiHasan.Models.ProductListAndSearchModel
+@{
+	var ProductList = Model.productListItems;
+	Shapping.DomainModel.BusinessModel.Product.ProductSearchModel sm = Model.sm;
+
+}
+@if (Model == null || ProductList.Count == 0)
+{
+	<h3 class="text-center text-danger">
+		There is no Product
+	</h3>
+}
+else
+{
+	<table class="table table-hover table-sm table-bordered table-striped">
+		<tr>
+			<td>ProductName</td>
+			<td>CategoryName</td>
+			<td>SupplierName</td>
+			<td>HasRelatedOrder</td>
+			<td>UnitPrice</td>
+			<td>Slug</td>
+			<td>Edit</td>
+			<td>Delete</td>
+			<td>Manage Picture Gallery</td>
+		</tr>
+		@foreach (var item in ProductList)
+		{
+			<tr id="tr_@item.ProductID">
+				<td>@item.ProductName</td>
+				<td>@item.CategoryName</td>
+				<td>@item.SuplierName</td>
+				<td>@item.HasRelatedOrder</td>
+				<td>@item.UnitPrice</td>
+				<td>@item.Slug</td>
+				<td>
+					@Html.ActionLink("Edit" , "ProductManagement" , new{ProductID =  item.ProductID} , new {@class = "btn btn-primary"})
+				</td>
+				<td>
+					<span class="btn btn-danger btn-sm btnDeleteProduct" data-id="@item.ProductID">Delete</span> @* in delete be ravesh ajax hast *@
+				</td>
+				<td>Manage Picture Gallery</td>
+			</tr>
+		}
+		<tr>
+			<td colspan="9" class="text-center">
+				<nav aria-label="Page navigation example">
+					<ul class="pagination">
+						@for (int i = 0; i < sm.PageCount; i++)
+						{
+							sm.PageIndex = i;
+							<li class="page-item">
+
+
+								@Html.ActionLink((i + 1).ToString(), "Index", "ProductManagement", sm, new { @class = "page-link" })
+
+							</li>
+						}
+					</ul>
+				</nav>
+			</td>
+		</tr>
+	</table>
+}
