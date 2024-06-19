@@ -29,6 +29,9 @@ namespace Shopping.BootStrap
             services.AddScoped<ISupplierApplication, SupplierApplication>();
             services.AddScoped<IProductApplication, ProductApplication>();
 
+
+            //text
+
         }
     }
 }
