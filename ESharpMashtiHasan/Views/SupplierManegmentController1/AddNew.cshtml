@@ -1,0 +1,39 @@
+﻿@model Shapping.DomainModel.BusinessModel.Supplier.SupplierAddEditModel;
+<form asp-controller="SupplierManegmentController1" asp-action="AddNew" method="post">
+	<table class="table table-bordered table-striped table-hover table-sm">
+		@if(TempData["ErrorMessage"] != null)
+		{
+			<tr>
+				<td colspan="2">
+					<h2 class="text-danger text-center">
+						@TempData["ErrorMessage"]
+					</h2>
+				</td>
+			</tr>
+		}
+		<tr>
+			<td>
+				SupplierName
+			</td>
+			<td>
+				<input type="text" asp-for="SupplierName" class="form-control" />
+				<span class="text-danger" asp-validation-for="SupplierName"></span>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Supplier Description
+			</td>
+			<td>
+				<input type="text" asp-for="SupplierDescription" class="form-control" />
+				<span class="text-danger" asp-validation-for="SupplierDescription"></span>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2" class="text-center">
+				<input type="submit" value="AddNew" class="btn btn-primary" />
+				<a asp-controller="SupplierManegmentController1" asp-action="Index" class="btn btn-warning">Return</a>
+			</td>
+		</tr>
+	</table>
+</form>

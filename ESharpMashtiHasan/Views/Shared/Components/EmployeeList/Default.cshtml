@@ -1,0 +1,53 @@
+﻿@model List<Shapping.DomainModel.BusinessModel.Employee.EmployeeListItem>
+@* public int EmployeeID { get; set; }
+
+		public int AddressID { get; set; }
+
+		public int Age { get; set; }
+
+		public string FirstName { get; set; }
+
+		public string LastName { get; set; }
+
+		public string Evidence { get; set; }
+
+		public string Position { get; set; }
+
+		public string MobileNumber { get; set; } *@
+
+@if (Model == null || Model.Count == 0)
+{
+    <h3 class="text-center text-danger"> 
+		There is no Employee
+	</h3>
+}
+else
+{
+	<table class="table table-bordered table-striped table-hover table-sm">
+		<tr>
+			<td>AddressID</td>
+			<td>Age</td>
+			<td>FirstName</td>
+			<td>LastName</td>
+			<td>Evidence</td>
+			<td>Position</td>
+			<td>MobileNumber</td>
+			<td>Edit</td>
+			<td>Delete</td>
+		</tr>
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>@item.AddressID</td>
+				<td>@item.Age</td>
+				<td>@item.FirstName</td>
+				<td>@item.LastName</td>
+				<td>@item.Evidence</td>
+				<td>@item.Position</td>
+				<td>@item.MobileNumber</td>
+				<td>Edit</td>
+				<td>Delete</td>
+			</tr>
+		}
+	</table>
+}

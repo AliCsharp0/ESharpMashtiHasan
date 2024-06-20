@@ -1,0 +1,106 @@
+﻿@model ESharpMashtiHasan.ViewModel.Products.ProductAddAndEditViewModel
+@{
+	Layout = null; 
+	SelectList categoryDropdown = (SelectList)ViewBag.categoryDropdown;
+	SelectList supplierDropdown = (SelectList)ViewBag.supplierDropdown;
+}
+<form asp-action="AddNew" asp-controller="ProductManagement" method="post" enctype="multipart/form-data">@* enctype="multipart/form-data" in ro agar nazarim Image null rad mishehe *@
+	
+	<table class="table table-hover table-sm table-bordered table-striped">
+		<tr>
+			<td>
+				<label for="CategoryID">Category</label>
+			</td>
+			<td>
+				<select asp-items="categoryDropdown " class="form-control" asp-for="CategoryID"></select>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label for="SupplierID">Supplier</label>
+			</td>
+			<td>
+				<select asp-for="SupplierID" class="form-control" asp-items="supplierDropdown"> </select>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				ProductName
+			</td>
+			<td>
+				<input type="text" asp-for="ProductName" class="form-control" />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				UnitPrice
+			</td>
+			<td>
+				<input type="text" asp-for="UnitPrice" class="form-control" />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				PageTitle
+			</td>
+			<td>
+				<input type="text" asp-for="PageTitle" class="form-control" />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Slug
+			</td>
+			<td>
+				<input type="text" asp-for="Slup" class="form-control" />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				MataDescription
+			</td>
+			<td>
+				<input type="text" asp-for="MataDescription" class="form-control" />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				MetaKeyWord
+			</td>
+			<td>
+				<input type="text" asp-for="MetaKeyWord" class="form-control" />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				JSONLDInformation
+			</td>
+			<td>
+				<input type="text" asp-for="JSONLDInformation" class="form-control" />
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2" class="text-center">
+				Description
+			</td>
+			<td colspan="2" class="text-center">
+				<textarea class="form-control" cols="60" rows="10" asp-for="Description"></textarea>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Image
+			</td>
+			<td>
+				<input type="file" asp-for="Image" />
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2" class="text-center">
+				@* in addNew not ajax hast *@
+				<input class="btn btn-success" name="name" value="Add New" />
+				<span class="btn btn-success" id="btnCancel">Cancel</span>
+			</td>
+		</tr>
+	</table>
+</form>

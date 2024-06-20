@@ -1,0 +1,121 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>@ViewData["Title"] - ESharpMashtiHasan</title>
+	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+	<link rel="stylesheet" href="~/ESharpMashtiHasan.styles.css" asp-append-version="true" />
+	<script>
+		function ConfirmDelete() {
+			return confirm("are you Sure");
+		}
+	</script>
+</head>
+<body>
+	<header>
+		<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+			<div class="container-fluid">
+				<a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ESharpMashtiHasan</a>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+						aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+					<ul class="navbar-nav flex-grow-1">
+						<li class="nav-item">
+							<a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link text-dark" asp-area="" asp-controller="SupplierManegmentController1" asp-action="Index">Supplier</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link text-dark" asp-area="" asp-controller="ProductManagement" asp-action="Index">Product</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link text-dark" asp-area="" asp-controller="EmployeeManagement" asp-action="Index">Employee</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</header>
+	<div class="container">
+		<main role="main" class="pb-3">
+			@RenderBody()
+		</main>
+	</div>
+
+	<footer class="border-top footer text-muted">
+		<div class="container">
+			&copy; 2024 - ESharpMashtiHasan - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+		</div>
+	</footer>
+
+	                                             @* Modal *@
+	<div class="modal fade" id="myModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<div id="dvContent2"></div>   @* in ja form addNew ro namaiesh midim braie hmin hast ke gozashtimesh *@
+				</div>
+
+			</div>
+		</div>
+	</div>
+	                                             @* Modal *@
+
+	<script src="~/lib/jquery/dist/jquery.min.js"></script>
+	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="~/js/site.js" asp-append-version="true"></script>
+	@* <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+	<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script> *@
+	@await RenderSectionAsync("Scripts", required: false)
+
+
+	<script>
+		function bindProductGrid(){
+			let SendingUrl = '@Url.Action("Search", "ProductManagement")';
+			let SendingData = $("#frmSearch").serialize;
+			$.get(SendingUrl, SendingData, function (grd) { 
+				$("#dvContent").html(grd);
+			});
+		}
+		$(document).on("click", ".btnDeleteProduct", function () {//in mige ha onsory ke name on btnDeleteProduct hast bad az click in function ro egra kon
+
+			var id = $(this).attr("data-id");//in ja id product ke mikaim delete konim ro mire va az in ja miare (<span class="btn btn-danger btn-sm btnDeleteProduct" data-id="item.ProductID">Delete</span>)
+			if (confirm('are you sure ?')) {//in ja dokme ok ia cancel ro namaiesh midim
+				let SendingUrl = '@Url.Action("Delete","ProductManagement")';
+				let SendingData = "id" + id;
+				$.post(SendingUrl, SendingData, function (op) {//be in migan success callback function
+					if (op.success.toString() === "true") {
+						bindProductGrid();
+					}
+					else{
+						alert("Delete Failed");
+					}
+				});
+			}
+		});
+		$(document).on("click", "#btnAddNewProduct", function () {
+
+			let SendingUrl = '@Url.Action("AddNew", "ProductManagement")';
+			let SendingData = null;
+			$.get(SendingUrl, SendingData, function (frm) {
+				$("#dvContent2").html(frm);
+			});
+			$("#myModal").modal("show");
+		});
+	</script>
+
+
+</body>
+</html>
