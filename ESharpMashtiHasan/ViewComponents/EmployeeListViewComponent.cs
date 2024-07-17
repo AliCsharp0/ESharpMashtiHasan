@@ -18,7 +18,26 @@ namespace ESharpMashtiHasan.ViewComponents
 		{
 			int rc = 0;
 			var employees = RepoEmp.Search(sm , out rc);
-			return View(employees);
+			Models.EmployeeListAndSearchModel psm = new Models.EmployeeListAndSearchModel
+			{
+				sm = sm,
+				employeeListItems = employees,
+			};
+			sm.RecordCount = rc;
+			if(sm.PageSize == 0)
+			{
+				sm.PageSize = 5;
+			}
+			if(sm.RecordCount % sm .PageSize  == 0)
+			{
+				sm.PageCount = sm.RecordCount / sm .PageSize; 
+			}
+			else
+			{
+				sm.PageCount = sm.RecordCount / sm.PageSize + 1;
+
+			}
+			return View(psm );
 		}
 	}
 }

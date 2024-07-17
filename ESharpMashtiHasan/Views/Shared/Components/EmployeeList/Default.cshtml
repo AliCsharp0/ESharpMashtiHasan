@@ -1,21 +1,10 @@
-﻿@model List<Shapping.DomainModel.BusinessModel.Employee.EmployeeListItem>
-@* public int EmployeeID { get; set; }
+﻿@model ESharpMashtiHasan.Models.EmployeeListAndSearchModel
+@{
+	var EmployeeList = Model.employeeListItems;
+	Shapping.DomainModel.BusinessModel.Employee.EmployeeSearchModel sm = Model.sm;
+}
 
-		public int AddressID { get; set; }
-
-		public int Age { get; set; }
-
-		public string FirstName { get; set; }
-
-		public string LastName { get; set; }
-
-		public string Evidence { get; set; }
-
-		public string Position { get; set; }
-
-		public string MobileNumber { get; set; } *@
-
-@if (Model == null || Model.Count == 0)
+@if (Model == null || EmployeeList.Count == 0)
 {
     <h3 class="text-center text-danger"> 
 		There is no Employee
@@ -35,9 +24,9 @@ else
 			<td>Edit</td>
 			<td>Delete</td>
 		</tr>
-		@foreach (var item in Model)
+		@foreach (var item in EmployeeList)
 		{
-			<tr>
+			<tr id="tr_@item.EmployeeID">
 				<td>@item.AddressID</td>
 				<td>@item.Age</td>
 				<td>@item.FirstName</td>
@@ -46,8 +35,28 @@ else
 				<td>@item.Position</td>
 				<td>@item.MobileNumber</td>
 				<td>Edit</td>
-				<td>Delete</td>
+				<td>
+					<span class="btn btn-danger btn-sm btnDeleteEmployee" data-id="@item.EmployeeID" >Delete</span>
+				</td>
 			</tr>
 		}
+		<tr>
+			<td colspan="9" class="text-center">
+				<nav aria-label="Page navigation example">
+					<ul class="pagination">
+						@for (int i = 0; i < sm.PageCount; i++)
+						{
+							sm.PageIndex = i;
+							<li class="page-item">
+
+
+								@Html.ActionLink((i + 1).ToString(), "Index", "EmployeeManagement", sm, new { @class = "page-link" })
+
+							</li>
+						}
+					</ul>
+				</nav>
+			</td>
+		</tr>
 	</table>
 }

@@ -1,10 +1,5 @@
 ﻿@model Shapping.DomainModel.BusinessModel.Employee.EmployeeSearchModel
-  @*  public string? FirstName { get; set; }
-
-		public string? LastName { get; set; }
-
-		public int? Age { get; set; } *@
-<form method="get" asp-action="Index" asp-controller="EmployeeManagement">
+<form method="get" asp-action="Index" asp-controller="EmployeeManagement" id="frmSearchEmp">
 	<table class="table table-hover table-striped table-sm table-bordered">
 		<tr>
 			<td><label for="FirstName">First Name</label></td>
@@ -28,8 +23,12 @@
 			<td class="text-center" colspan="2">
 				<input type="submit" value="Search" class="btn btn-success" />
 				<a asp-action="Index" asp-controller="EmployeeManagement" class="btn btn-primary">Remove Filter</a>
+				<span class="btn btn-primary" id="btnAddNewEmployee">Add New</span>
 			</td>
 		</tr>
 	</table>
-	@await Component.InvokeAsync("EmployeeList" , this.Model)
+	<div id="dvContent">
+		@await Component.InvokeAsync("EmployeeList", this.Model)
+	</div>
+	
 </form>

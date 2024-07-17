@@ -81,7 +81,7 @@
 	@await RenderSectionAsync("Scripts", required: false)
 
 
-	<script>
+	<script> /* Product */
 		function bindProductGrid(){
 			let SendingUrl = '@Url.Action("Search", "ProductManagement")';
 			let SendingData = $("#frmSearch").serialize;
@@ -94,7 +94,7 @@
 			var id = $(this).attr("data-id");//in ja id product ke mikaim delete konim ro mire va az in ja miare (<span class="btn btn-danger btn-sm btnDeleteProduct" data-id="item.ProductID">Delete</span>)
 			if (confirm('are you sure ?')) {//in ja dokme ok ia cancel ro namaiesh midim
 				let SendingUrl = '@Url.Action("Delete","ProductManagement")';
-				let SendingData = "id" + id;
+				let SendingData = "id=" + id;
 				$.post(SendingUrl, SendingData, function (op) {//be in migan success callback function
 					if (op.success.toString() === "true") {
 						bindProductGrid();
@@ -116,6 +116,40 @@
 		});
 	</script>
 
+	<script> /* Employee */
+		function BindEmployeeGrid(){
+			let SendingUrl = '@Url.Action("Search", "EmployeeManagement")';
+			let SendingData = $("#frmSearchEmp").serialize();
+			$.get(SendingUrl, SendingData, function (grd) {
+				$("#dvContent").html(grd); /* in Searche ro tekrar mikone ke dige bad az bindgrid kol safhe refresh nashe va Searchmon az bein nare */
+			});
+		}
+
+		$(document).on("click", ".btnDeleteEmployee", function () {
+			var id = $(this).attr("data-id");
+			if (confirm("are you sure ?")) {
+				let SendingUrl = '@Url.Action("Delete" , "EmployeeManagement")';
+				let SendingData = "id=" + id; /* in chizi hast ke mikhoim be in public JsonResult Delete(int id) dar EmployeeManagement pas bdeim iani int id ro meghdar dehi konim */
+				$.post(SendingUrl, SendingData, function (op) { /* in ja mige agar mofagh bod shoma az backend iek json be name op dariaft mikonid */
+					if (op.success.toString()  === "true"){
+						alert("doreste");
+						   BindEmployeeGrid();
+					}
+					else {
+						alert(op.message);
+					}
+				});
+			}
+		});
+		$(document).on("click", "#btnAddNewEmployee", function () {
+			let SendingUrl = '@Url.Action("AddNew", "EmployeeManagement")'; /* in ja be url addnew iek query mizane */
+			let SendingData = null;
+			$.get(SendingUrl, SendingData, function (frm) {
+				$("#dvContent2").html(frm);
+				$("#myModal").modal("show");
+			});
+		});
+	</script>
 
 </body>
 </html>

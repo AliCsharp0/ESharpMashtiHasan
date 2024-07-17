@@ -1,0 +1,70 @@
+﻿@model ESharpMashtiHasan.ViewModel.Employee.EmployeeAddAndEditViewModel
+@{
+	Layout = null;
+}
+<form asp-action="AddNew" asp-controller="EmployeeManagement" method="post">
+    <table class="table table-bordered table-hover table-striped">
+        <tr>
+            <td>
+                FirstName
+            </td>
+            <td>
+                <input type="text" asp-for="FirstName" class="form-control" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                LastName
+            </td>
+            <td>
+                <input type="text" asp-for="LastName" class="form-control" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Age
+            </td>
+            <td>
+                <input type="text" asp-for="Age" class="form-control" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                AddressID
+            </td>
+            <td>
+                <input type="text" asp-for="AddressID" class="form-control" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Evidence
+            </td>
+            <td>
+                <input type="text" asp-for="Evidence" class="form-control" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Position
+            </td>
+            <td>
+                <input type="text" asp-for="Position" class="form-control" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                MobileNumber
+            </td>
+            <td>
+                <input type="text" asp-for="MobileNumber" class="form-control" />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" class="text-center">
+                <input type="submit" class="btn-success" value="AddNew" name="name" />
+                <span class="btn btn-danger" id="btnCancel">Cancel</span>
+            </td>
+        </tr>
+    </table>
+</form>
